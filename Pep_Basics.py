@@ -70,9 +70,22 @@ class Basics():
         N = N * pow(10, left_digit) + left_no
         print(N)
 
+    def gcd(self, n1, n2):
+        if n1 == 0:
+            return n2
+        return self.gcd(n2 % n1, n1)
 
+    def lcm(self, n1, n2):
+        lcm = (n1 * n2) / self.gcd(n1, n2)
+        return lcm
 
-
+    def primeFactors(self, number):
+        for i in range(2,number):
+            while number % i == 0:
+                print(i)
+                number = number / i
+            if number == 1:
+                return
 
 if __name__ == '__main__':
     obj = Basics()
@@ -84,4 +97,7 @@ if __name__ == '__main__':
     # obj.printDigits(89024234)
     # print(obj.reverseNumber(123))
     # print(obj.inverseNumber(24153))
-    print(obj.rotateNumber(12345, -2))
+    # print(obj.rotateNumber(12345, -2))
+    # print(obj.gcd(36, 24))
+    # print(obj.lcm(36, 24))
+    obj.primeFactors(1440)
