@@ -21,7 +21,7 @@ class Basics():
                 return
         print(str(number) + " Prime ")
 
-    def febonacci(self, n):
+    def febonacci(self, number):
         # Recurssion
         if number < 0: return 
         if number <= 1: return number
@@ -32,6 +32,47 @@ class Basics():
         #     f.append(f[i-1] + f[i-2])
         # return f[n]
 
+    def countDigits(self, number):
+        count = 0
+        while number != 0:
+            number = number // 10
+            count += 1
+        return count
+
+    def printDigits(self, number):
+        while number != 0:
+            print(number%10)
+            number /= 10
+        return 
+
+    def reverseNumber(self, number):
+        ans = ""
+        while number != 0:
+            ans = ans + str(number%10)
+            number /= 10
+        return int(ans) 
+
+    def inverseNumber(self, number):
+        position = 0
+        ans = 0
+        while number != 0:
+            position += 1
+            ans = ans + position * pow(10, (number % 10) - 1)
+            number = number // 10
+        return ans
+
+    def rotateNumber(self, N, K):
+        X = self.countDigits(N)
+        K = ((K % X) + X) % X
+        left_no = N // pow(10, X - K)
+        N = N % pow(10, X - K)
+        left_digit = self.countDigits(left_no)
+        N = N * pow(10, left_digit) + left_no
+        print(N)
+
+
+
+
 
 if __name__ == '__main__':
     obj = Basics()
@@ -39,5 +80,8 @@ if __name__ == '__main__':
     # for i in range(0,100):
     #     obj.isPrime(i)
     # print(obj.febonacci(9))
-
-    
+    # print(obj.countDigits(89024234))
+    # obj.printDigits(89024234)
+    # print(obj.reverseNumber(123))
+    # print(obj.inverseNumber(24153))
+    print(obj.rotateNumber(12345, -2))
