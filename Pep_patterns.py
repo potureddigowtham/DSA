@@ -90,13 +90,47 @@ class Solution:
                     line += "     "
             print(line)
 
+    def pattern9(self, n):
+        for i in range(1, n):
+            line = ''
+            for j in range(1, n):
+                if i+j == n and i != j:
+                    line += "*    "
+                elif i==j:
+                    line += "*    "
+                else:
+                    line += "     "
+            print(line)
+
+    def pattern10(self, n):
+        o_ = n/2
+        i_ = -1
+        for i in range(1, n+1):
+            line = ''
+            for j in range(1, o_+1):
+                line += ("\t")
+            line += ("*\t")
+            for k in range(1, i_+1):
+                line += ("\t")
+            if i > 1 and i < n:
+                line += ("*\t")
+            if i <= n/2:
+                o_ -= 1
+                i_ += 2
+            else:
+                o_ += 1
+                i_ -= 2
+            print(line)
+
 if __name__ == '__main__':
     obj = Solution()
-    # obj.pattern1(5)s
+    # obj.pattern1(5)
     # obj.pattern2(5)
     # obj.pattern3(5)
     # obj.pattern4(5)  
     # obj.pattern5(5)  
     # obj.pattern6(5)  
     # obj.pattern7(5)  
-    obj.pattern8(5)  
+    # obj.pattern8(5)  
+    # obj.pattern9(6) 
+    # obj.pattern10(5)
