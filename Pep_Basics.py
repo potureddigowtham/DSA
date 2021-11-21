@@ -89,15 +89,15 @@ class Basics():
 
 if __name__ == '__main__':
     obj = Basics()
-    # obj.Z(5)
-    # for i in range(0,100):
-    #     obj.isPrime(i)
-    # print(obj.febonacci(9))
-    # print(obj.countDigits(89024234))
-    # obj.printDigits(89024234)
-    # print(obj.reverseNumber(123))
-    # print(obj.inverseNumber(24153))
-    # print(obj.rotateNumber(12345, -2))
-    # print(obj.gcd(36, 24))
-    # print(obj.lcm(36, 24))
+    obj.Z(5)
+    for i in range(0,100):
+        obj.isPrime(i)
+    print(obj.febonacci(9))
+    print(obj.countDigits(89024234))
+    obj.printDigits(89024234)
+    print(obj.reverseNumber(123))
+    print(obj.inverseNumber(24153))
+    print(obj.rotateNumber(12345, -2))
+    print(obj.gcd(36, 24))
+    print(obj.lcm(36, 24))
     obj.primeFactors(1440)
