@@ -122,6 +122,19 @@ class Solution:
                 i_ -= 2
             print(line)
 
+    def pattern11(self, n):
+        number = 1
+        for i in range(1, n+1):
+            line = ''
+            for j in range(1, n+1):
+                if j <= i:
+                    if number < 10:
+                        line += str(number)+"\t\t"
+                    else:
+                        line += str(number)+"\t"
+                    number += 1
+            print(line)
+
 if __name__ == '__main__':
     obj = Solution()
     # obj.pattern1(5)
@@ -134,3 +147,4 @@ if __name__ == '__main__':
     # obj.pattern8(5)  
     # obj.pattern9(6) 
     # obj.pattern10(5)
+    obj.pattern11(5)
