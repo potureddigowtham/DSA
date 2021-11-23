@@ -135,6 +135,18 @@ class Solution:
                     number += 1
             print(line)
 
+    def pattern12(self, n):
+        a = 0
+        b = 1
+        for i in range(1, n+1):
+            line = ''
+            for j in range(1, i+1):
+                line += str(a)+"\t"
+                c = a+b
+                a = b
+                b = c
+            print(line)
+
 if __name__ == '__main__':
     obj = Solution()
     # obj.pattern1(5)
@@ -147,4 +159,5 @@ if __name__ == '__main__':
     # obj.pattern8(5)  
     # obj.pattern9(6) 
     # obj.pattern10(5)
-    obj.pattern11(5)
+    # obj.pattern11(5)
+    # obj.pattern12(5)
