@@ -147,6 +147,153 @@ class Solution:
                 b = c
             print(line)
 
+    def pattern13(self, n):
+        for i in range(0, n+1):
+            line = ''
+            icj = 1
+            for j in range(0, i+1):
+                line += str(icj)+"\t"
+                icjp1 = (icj * (i - j))/ (j+1)
+                icj = icjp1
+            print(line)
+
+    def pattern14(self, n):
+        for i in range(1, 11):
+            line = str(n) + " x " + str(i) + " = " + str(n*i) 
+            print(line)
+
+    def pattern15(self, n):
+        _ = n//2
+        star = 1
+        value  = 1
+        for i in range(1, n+1):
+            line = ''
+            cval = value
+            for j in range(_):
+                line += (" \t")
+            for k in range(star):
+                line += str(cval)+("\t")
+                if k < star //2 :
+                    cval += 1
+                else:
+                    cval -= 1
+            if i <= (n // 2):
+                _ -= 1
+                star += 2            
+                value += 1
+            else:
+                _ += 1
+                star -=2
+                value -= 1
+            print(line) 
+
+    def pattern16(self, n):
+        star = 1
+        _ = 2*n - 3
+        for i in range(1, n+1):
+            value = 1
+            line = ''
+            for j in range(star):
+                line +=  str(value)+"\t"
+                value += 1
+            
+            for k in range(_):
+                line += "\t"
+
+            if i == n:
+                value -= 1
+                star -= 1
+            for l in range(star):
+                value -= 1
+                line += str(value)+"\t"
+
+            star += 1
+            _ -= 2
+            print(line)
+
+    def pattern17(self, n):
+        _ = 2
+        star = 1
+        for i in range(1, n+1):
+            line = ''
+
+            for j in range(_):
+                if i == n // 2 + 1:
+                    line += "*\t"
+                else:
+                    line += "\t"
+
+            for k in range(star):
+                line += "*\t"
+
+            if i <= n//2:
+                star += 1
+            else:
+                star -= 1
+            print(line)
+
+    def pattern18(self, n):
+        for i in range(1, n+1):
+            line = ''
+            for j in range(1, n+1):
+                if i == 1 or i == n or i == j or i+j == n+1:
+                    line += "*\t"
+                elif i > n // 2 and i + j > n and j < i:
+                    line += "*\t"
+                else:
+                    line += "\t"
+
+            print(line)
+
+    def pattern19(self, n):
+        for i in range(1, n+1):
+            line = ''
+            for j in range(1, n+1):
+                if i == 1:
+                    if j == n or j <= n // 2 + 1:
+                        line += "*\t"
+                    else:
+                        line += "\t"
+
+                elif i <= n // 2:
+                    if j == n or j == n // 2 + 1:
+                        line += "*\t"
+                    else:
+                        line += "\t"
+
+                elif i == n // 2 + 1:
+                    line += "*\t"
+
+                elif i < n:
+                    if j == 1 or j == n // 2 + 1:
+                        line += "*\t"
+                    else:
+                        line += "\t"
+
+                else:
+                    if j == 1 or j >= n // 2 + 1:
+                        line += "*\t"
+                    else:
+                        line += "\t"
+            print(line)
+
+    def pattern20(self, n):
+        for i in range(1, n+1):
+            line = ""
+            for j in range(1, n+1):
+                if j == 1 or j == n:
+                    line += "*\t"
+                elif i >= n // 2 + 1:
+                    if i + j == n+1 or i == j:
+                        line += "*\t"
+                    else:
+                        line += "\t"
+                else:
+                    line += "\t"
+
+            print(line)
+
+
 if __name__ == '__main__':
     obj = Solution()
     # obj.pattern1(5)
@@ -161,3 +308,11 @@ if __name__ == '__main__':
     # obj.pattern10(5)
     # obj.pattern11(5)
     # obj.pattern12(5)
+    # obj.pattern13(5)
+    # obj.pattern14(10)
+    # obj.pattern15(5)
+    # obj.pattern16(4)
+    # obj.pattern17(5)
+    # obj.pattern18(7)
+    # obj.pattern19(7)
+    obj.pattern20(5)
