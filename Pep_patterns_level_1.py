@@ -290,7 +290,6 @@ class Solution:
                         line += "\t"
                 else:
                     line += "\t"
-
             print(line)
 
 
@@ -315,4 +314,4 @@ if __name__ == '__main__':
     # obj.pattern17(5)
     # obj.pattern18(7)
     # obj.pattern19(7)
-    obj.pattern20(5)
+    # obj.pattern20(5)
