@@ -64,10 +64,92 @@ class pep_arrays_level_1():
             j -= 1
         print(ans[::-1])
 
+    def reverse_array(self, array):
+        size = len(array)
+        start = 0
+        end = size-1
+        while start+1 != end and start != end:
+            array[start], array[end] = array[end], array[start]
+            start += 1
+            end -= 1
+        print(array)
+        return array
+
+    def reverse_array_recursion_1(self, array, start, end):
+        if not array:
+            return array
+        a, b = array[0], array[1:]
+        return self.reverse_array_recursion(b) + [a]
+
+    def reverse_array_recursion_2(self, array, start, end):
+        if not array or start >= len(array)/2:
+            return array
+        array[start], array[end-1] = array[end-1], array[start]
+        self.reverse_array_recursion(array, start+1, end-1)
+        return array
+
+    def reverse_array_recursion_3(self, array):
+        if len(array) == 0:
+            return []
+        return [array[-1]] + self.reverse_array_recursion_3(array[:-1])
+
+    def rotate_array(self, array, k):
+        if k >= 0:
+            k = len(array) - k
+        else:
+            k = len(array) + k
+        return array[k:] + array[:k]
+
+    def inverse_array(self, array):
+        array2 = [0]*len(array)
+        for i, k in enumerate(array):
+            array2[k] = i
+        return array2
+
+    def print_sub_array(self, array):
+        n = 0
+        m = len(array) - 1
+        while n <= m:
+            line = ''
+            for i, k in enumerate(array[n:]):
+                line += str(k)
+                print(line)
+            n += 1
+
+    def broken_economy(self, array, k):
+        # if k in array:
+        #     return k
+        # else:
+        #     for i, j in enumerate(array):
+        #         if j > k:
+        #             return j, array[i-1]
+
+        low, high, ciel, floor = 0, len(array)-1, 0, 0
+        while low <= high:
+            mid = (low+high) / 2
+            if k < array[mid]:
+                high = mid - 1
+                ciel = array[mid]
+            elif k > array[mid]:
+                low = mid + 1
+                floor = array[mid]
+            else:
+                print(array[mid])
+                return array[mid]
+        print(ciel, floor)
+
 
 if __name__ == "__main__":
     obj = pep_arrays_level_1()
     # print(obj.span_of_array([15,30,40,4,11,9]))
     # obj.bar_chart([3,1,0,7,5])
     # obj.add_arrays([9, 9, 9], [1])
-    obj.subtract_arrays([9, 9, 9, 9], [3, 3, 3, 3, 3, 3])
+    # obj.subtract_arrays([9, 9, 9, 9], [3, 3, 3, 3, 3, 3])
+    # print(obj.reverse_array([0, 1, 2, 3, 4, 5]))
+    # print(obj.reverse_array_recursion_1([0, 1, 2, 3, 4, 5]))
+    # print(obj.reverse_array_recursion_2([0, 1, 2, 3, 4, 5], 0, 6))
+    # print(obj.reverse_array_recursion_3([0, 1, 2, 3, 4, 5]))
+    # print(obj.rotate_array([1, 2, 3, 4, 5], -3))
+    # print(obj.inverse_array([4, 5, 2, 0, 1, 3]))
+    # obj.print_sub_array([1, 2, 3])
+    obj.broken_economy([1, 5, 10, 15, 22, 33, 40, 42, 55, 66], 22)
