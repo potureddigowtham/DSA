@@ -138,6 +138,53 @@ class pep_arrays_level_1():
                 return array[mid]
         print(ciel, floor)
 
+    def first_last_index(self, array, k):
+        i = 0
+        j = len(array) - 1
+        first, last = 0, 0
+        while i <= j:
+            mid = (i+j) / 2
+            if k < array[mid]:
+                j = mid - 1
+            elif k > array[mid]:
+                i = mid + 1
+            else:
+                j = mid - 1
+                first = mid
+        print(first)
+
+        i = 0
+        j = len(array) - 1
+
+        while i <= j:
+            mid = (i+j) / 2
+            if k < array[mid]:
+                j = mid - 1
+            elif k > array[mid]:
+                i = mid + 1
+            else:
+                i = mid + 1
+                last = mid
+        print(last)
+
+
+
+
+        # first = -1
+        # last = -1
+        # n = len(array)
+        # for i in range(0, n):
+        #     if (k != array[i]):
+        #         continue
+        #     if (first == -1):
+        #         first = i
+        #     last = i
+        
+        # if (first != -1):
+        #     print("First Occurrence = ", first, "Last Occurrence = ", last)
+        # else:
+        #     print("Not Found")
+
 
 if __name__ == "__main__":
     obj = pep_arrays_level_1()
@@ -152,4 +199,5 @@ if __name__ == "__main__":
     # print(obj.rotate_array([1, 2, 3, 4, 5], -3))
     # print(obj.inverse_array([4, 5, 2, 0, 1, 3]))
     # obj.print_sub_array([1, 2, 3])
-    obj.broken_economy([1, 5, 10, 15, 22, 33, 40, 42, 55, 66], 22)
+    # obj.broken_economy([1, 5, 10, 15, 22, 33, 40, 42, 55, 66], 1)
+    obj.first_last_index([1, 2, 2, 2, 9, 9, 9, 10], 1)
