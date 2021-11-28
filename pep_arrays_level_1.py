@@ -167,9 +167,6 @@ class pep_arrays_level_1():
                 last = mid
         print(last)
 
-
-
-
         # first = -1
         # last = -1
         # n = len(array)
@@ -179,11 +176,36 @@ class pep_arrays_level_1():
         #     if (first == -1):
         #         first = i
         #     last = i
-        
         # if (first != -1):
         #     print("First Occurrence = ", first, "Last Occurrence = ", last)
         # else:
         #     print("Not Found")
+
+    def subsets_of_array(self, array):
+        length = pow(2, len(array))
+
+        for i in range(length):
+            line = ''
+            for j in range(len(array)):
+                temp = (i % 2)
+                i = i / 2
+                if temp == 0:
+                    line += "_\t"
+                else:
+                    line += str(array[j]) + ""
+            print(line)    
+
+    def inverted_bar_chart(self, array):
+        n = len(array)
+        m = max(array)
+        for i in range(m):
+            line = ''
+            for j in range(n):
+                if i < array[j]:
+                    line += "*\t"
+                else:
+                    line += "\t"
+            print(line)
 
 
 if __name__ == "__main__":
@@ -200,4 +222,6 @@ if __name__ == "__main__":
     # print(obj.inverse_array([4, 5, 2, 0, 1, 3]))
     # obj.print_sub_array([1, 2, 3])
     # obj.broken_economy([1, 5, 10, 15, 22, 33, 40, 42, 55, 66], 1)
-    obj.first_last_index([1, 2, 2, 2, 9, 9, 9, 10], 1)
+    # obj.first_last_index([1, 2, 2, 2, 9, 9, 9, 10], 1)
+    # obj.subsets_of_array([10, 20, 30])
+    # obj.inverted_bar_chart([3, 1, 0, 7, 5])
