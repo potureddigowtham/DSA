@@ -12,7 +12,7 @@ class LinkedList:
         self.head = node
 
     def printll(self):
-        if self.head == None:
+        if self.head is None:
             print("Linkedlist is empty")
             return
         itr = self.head
