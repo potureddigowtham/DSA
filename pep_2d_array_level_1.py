@@ -104,10 +104,15 @@ class Solution:
         print(i, j)
 
     def array_rotate_by_90_degrees_transpose_reverse(self):
-        array = [['00', '01', '02', '03'],
-                 ['10', '11', '12', '13'],
-                 ['20', '21', '22', '23'],
-                 ['30', '31', '32', '33']]
+        # array = [['00', '01', '02', '03'],
+        #          ['10', '11', '12', '13'],
+        #          ['20', '21', '22', '23'],
+        #          ['30', '31', '32', '33']]
+
+        array = [['0', '1', '2', '3'],
+                 ['4', '5', '6', '7'],
+                 ['8', '9', '10', '11'],
+                 ['12', '13', '14', '15']]
 
         for i in range(len(array)):
             for j in range(i+1, len(array)):
@@ -125,12 +130,110 @@ class Solution:
             i += 1
         print(array)
 
+    def ring_rotate(self):
+        # array = [['00', '01', '02', '03'],
+        #          ['10', '11', '12', '13'],
+        #          ['20', '21', '22', '23'],
+        #          ['30', '31', '32', '33']]
+
+        array = [['00', '01', '02', '03', '04', '05'],
+                 ['10', '11', '12', '13', '14', '15'],
+                 ['20', '21', '22', '23', '24', '25'],
+                 ['30', '31', '32', '33', '34', '35'],
+                 ['40', '41', '42', '43', '44', '45'],
+                 ['50', '51', '52', '53', '54', '55']]
+
+        n = len(array)
+        s = 3
+        r = 1
+        while r != 0:
+            i, j = s-1, s-1
+            temp = array[i][j]
+            while i < n - s:
+                i += 1
+                array[i][j], temp = temp, array[i][j]
+            while j < n - s:
+                j += 1
+                array[i][j], temp = temp, array[i][j]
+            while i > s-1:
+                i -= 1
+                array[i][j], temp = temp, array[i][j]
+            while j > s-1:
+                j -= 1
+                array[i][j], temp = temp, array[i][j]
+            r -= 1
+        print(array)
+
+    def state_of_wakanda_2(self):
+        array = [['00', '01', '02', '03'],
+                 ['10', '11', '12', '13'],
+                 ['20', '21', '22', '23'],
+                 ['30', '31', '32', '33']]
+
+        for j in range(len(array[0])):
+            i = 0
+            k = j
+            while k < len(array[0]):
+                print(array[i][k])
+                i += 1
+                k += 1
+
+    def saddle_point(self):
+        mat = [[1, 2, 3],
+               [4, 5, 6],
+               [7, 8, 9]]
+
+        n = len(mat)
+
+        for i in range(n):
+            min_row = mat[i][0]
+            col_ind = 0
+            for j in range(1, n):
+                if (min_row > mat[i][j]):
+                    min_row = mat[i][j]
+                    col_ind = j
+            k = 0
+            for k in range(n):
+                if (min_row < mat[k][col_ind]):
+                    break
+                k += 1
+            if (k == n):
+                print("Value of Saddle Point ", min_row)
+                return True
+        return False
+  
+    def search_in_sorted_2d_array(self, x):
+        a = [[00, 1, 2],
+             [10, 11, 12],
+             [20, 21, 22]]
+        i = 0
+        j = len(a[0])-1
+
+        if a[i][j] == x:
+            return (i, j)
+
+        while a[i][j] < x and i < len(a) - 1:
+            i += 1
+            if a[i][j] == x:
+                return (i, j)
+            
+        while a[i][j] > x and j > 0:
+            j -= 1
+            if a[i][j] == x:
+                return (i, j)
+
+        return False
+
     def main(self):
         # self.matrix_mul()
         # self.state_of_wakanda_1()
         # self.spiral_matrix()
         # self.exit_point_of_matrix()
-        self.array_rotate_by_90_degrees_transpose_reverse()
+        # self.array_rotate_by_90_degrees_transpose_reverse()
+        # self.ring_rotate()
+        # self.state_of_wakanda_2()
+        # self.saddle_point()
+        print(self.search_in_sorted_2d_array(00))
 
 
 if __name__ == '__main__':
