@@ -1,7 +1,4 @@
 class Solution:
-    def __init__(self):
-        pass
-
     def print_decresing(self, n):
         if n < 1:
             return
@@ -64,6 +61,7 @@ class Solution:
         # print(self.power_logarithmic(2, 5))
         # self.zigzag(5)
         # self.tower_of_hanoi(2, 'a', 'b', 'c')
+        pass
 
 
 if __name__ == "__main__":
