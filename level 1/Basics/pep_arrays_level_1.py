@@ -220,7 +220,7 @@ if __name__ == "__main__":
     # print(obj.reverse_array_recursion_3([0, 1, 2, 3, 4, 5]))
     # print(obj.rotate_array([1, 2, 3, 4, 5], -3))
     # print(obj.inverse_array([4, 5, 2, 0, 1, 3]))
-    # obj.print_sub_array([1, 2, 3])
+    obj.print_sub_array([1, 2, 3])
     # obj.broken_economy([1, 5, 10, 15, 22, 33, 40, 42, 55, 66], 1)
     # obj.first_last_index([1, 2, 2, 2, 9, 9, 9, 10], 1)
     # obj.subsets_of_array([10, 20, 30])

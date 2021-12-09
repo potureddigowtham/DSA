@@ -55,8 +55,8 @@ class Solution:
             return n
         return self.fac(n-1)+self.fac(n-2)
 
-    # def main(self):
-        # self.substrings("abccbc")
+    def main(self):
+        self.substrings("abccbc")
         # print(self.palindrome("abaaba"))
         # self.string_compression('aaabbccaaaaaaggggdee')
         # self.toggle_char('GowTHam')
@@ -65,4 +65,4 @@ class Solution:
 
 if __name__ == "__main__":
     obj = Solution()
-    # obj.main()
+    obj.main()
