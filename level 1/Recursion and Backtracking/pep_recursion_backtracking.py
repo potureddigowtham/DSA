@@ -29,7 +29,6 @@ class Solution:
 
 
     def main(self):
-        # arr = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
         # arr = [[0, 1, 0, 0, 0, 0, 0], [0, 1, 0, 1, 1, 1, 0],
         #        [0, 0, 0, 0, 0, 0, 0], [1, 0, 1, 1, 0, 1, 1],
         #        [1, 0, 1, 1, 0, 1, 1], [1, 0, 0, 0, 0, 0, 0]]
@@ -40,7 +39,7 @@ class Solution:
         #         temp.append(False)
         #     visited.append(temp)
         # self.flood_fill(arr, 0, 0, "", visited, len(arr), len(arr[0]))
-        self.target_sum_subsets([1, 2, 3, 4, 5], 0, "", 0, 6)
+        # self.target_sum_subsets([1, 2, 3, 4, 5], 0, "", 0, 6)
 
 
 if __name__ == "__main__":
