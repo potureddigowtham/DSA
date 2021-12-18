@@ -1,7 +1,7 @@
 class Solution:
 
     def flood_fill(self, arr, r, c, ans, visited, n, m):
-        if r < 0 or c < 0 or r == n or c == m or arr[r][c] == 1 or visited[r][c] == True:
+        if r < 0 or c < 0 or r == n or c == m or arr[r][c] == 1 or visited[r][c] is True:
             return
 
         if r == n-1 and c == m-1:
@@ -39,9 +39,9 @@ class Solution:
         #         temp.append(False)
         #     visited.append(temp)
         # self.flood_fill(arr, 0, 0, "", visited, len(arr), len(arr[0]))
-        # self.target_sum_subsets([1, 2, 3, 4, 5], 0, "", 0, 6)
+        self.target_sum_subsets([1, 2, 3, 4, 5], 0, "", 0, 6)
 
-
+ 
 if __name__ == "__main__":
     obj = Solution()
     obj.main()
