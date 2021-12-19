@@ -143,6 +143,28 @@ class Solution:
                     dp[i][j] = max(arr2[i-1]+dp[i-1][j - arr1[i-1]], dp[i-1][j])
                 else:
                     dp[i][j] = dp[i-1][j]
+        print(dp)
+        print(dp[-1][-1])
+
+    def zero_one_knapsack_unbounded_dp_1(self, arr1, arr2, target, dp):
+        for i in range(len(dp)):
+            maxi = 0
+            for k, j in enumerate(arr1):
+                if j <= i:
+                    maxi = max(maxi, arr2[k]+dp[i-j])
+            dp[i] = maxi
+        print(dp)
+
+    def zero_one_knapsack_unbounded_dp_2(self, arr1, arr2, target, dp):
+        for i in range(len(arr1)+1):
+            for j in range(target+1):
+                if i == 0 or j == 0:
+                    dp[i][j] = 0
+                elif (arr1[i-1] <= j):
+                    dp[i][j] = max(arr2[i-1]+dp[i-1][j - arr1[i-1]], dp[i-1][j], arr2[i-1]+dp[i][j-arr1[i-1]])
+                else:
+                    dp[i][j] = dp[i-1][j]
+        print(dp)
         print(dp[-1][-1])
  
     def main(self):
@@ -186,6 +208,23 @@ class Solution:
         # dp = [0] * (amt + 1)
         # self.coin_change_permutations_dp(arr, dp, amt)
 
+        arr1 = [2, 5, 1, 3, 4]
+        arr2 = [15, 14, 10, 45, 30]
+        target = 7
+        dp = []
+        for i in range(len(arr1)+1):
+            temp = []
+            for j in range(target+1):
+                temp.append(0)
+            dp.append(temp)
+        self.zero_one_knapsack_dp(arr1, arr2, target, dp)
+
+        # arr1 = [2, 5, 1, 3, 4]
+        # arr2 = [15, 14, 10, 45, 30]
+        # target = 7
+        # dp = [0] * (target+1)
+        # self.zero_one_knapsack_unbounded_dp_1(arr1, arr2, target, dp)
+
         # arr1 = [2, 5, 1, 3, 4]
         # arr2 = [15, 14, 10, 45, 30]
         # target = 7
@@ -195,7 +234,7 @@ class Solution:
         #     for j in range(target+1):
         #         temp.append(0)
         #     dp.append(temp)
-        # self.zero_one_knapsack_dp(arr1, arr2, target, dp)
+        # self.zero_one_knapsack_unbounded_dp_2(arr1, arr2, target, dp)
 
 
 if __name__ == "__main__":
