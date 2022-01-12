@@ -1,77 +1,201 @@
 class Solution:
-    def bubble(self, arr):
-        n = len(arr)
-        for i in range(n-1):
-            for j in range(0, n-i-1):
-                if arr[j] > arr[j + 1] :
-                    arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    # def bubble(self, arr):
+    #     n = len(arr)
+    #     for i in range(n-1):
+    #         for j in range(0, n-i-1):
+    #             if arr[j] > arr[j + 1] :
+    #                 arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    #     return arr
+
+    # def selection(self,arr):
+    #     for i in range(len(arr)):
+    #         min = i
+    #         for j in range(i+1,len(arr)):
+    #             if arr[min] > arr[j]:
+    #                 min = j
+    #         arr[min], arr[i] = arr[i], arr[min]
+    #     return arr
+
+    # def insertion(self,arr):
+    #     for i in range(1, len(arr)):
+    #         value = arr[i]
+    #         hole = i
+    #         while (hole > 0 and arr[hole - 1] > value):
+    #             arr[hole] = arr[hole - 1]
+    #             hole -= 1
+    #         arr[hole] = value
+    #     return arr 
+
+    # def merge2arrays(self, arr1, arr2):
+    #     arr3 = []
+    #     i = j = 0
+    #     while i < len(arr1) and j < len(arr2):
+    #         if arr1[i] < arr2[j]:
+    #             arr3.append(arr1[i])
+    #             i += 1
+    #         else:
+    #             arr3.append(arr2[j])
+    #             j += 1
+
+    #     while i < len(arr1):
+    #         arr3.append(arr1[i])
+    #         i += 1
+        
+    #     while j < len(arr2):
+    #         arr3.append(arr2[j])
+    #         j += 1
+
+    #     return arr3
+
+    # def mergesort(self, arr):
+    #     if len(arr) < 2:
+    #         return arr
+    #     n = int(len(arr)/2)
+    #     l = self.mergesort(arr[:n])
+    #     r = self.mergesort(arr[n:])
+    #     return self.merge2arrays(l,r)
+
+    # def pivot(self, arr, lo, hi):
+    #     p = arr[hi]
+    #     i = lo
+    #     j = lo
+    #     while i <= hi:
+    #         if arr[i] > p:
+    #             i += 1
+    #         else:
+    #             arr[i], arr[j] = arr[j], arr[i]
+    #             i += 1
+    #             j += 1
+    #     return j-1
+
+    # def quicksort(self, arr, lo, hi):
+    #     if len(arr) <= 1:
+    #         return arr
+    #     if lo < hi:
+    #         pi = self.pivot(arr, lo, hi)
+    #         self.quicksort(arr, lo, pi-1)
+    #         self.quicksort(arr, pi+1, hi)
+    #     return arr
+
+    # def quickselect(self, arr, k, lo, hi):
+    #     pi = self.pivot(arr, lo, hi)
+    #     if k > pi:
+    #         return self.quickselect(arr, k, pi+1, hi)
+    #     elif k < pi:
+    #         return self.quickselect(arr, k, lo, pi-1)
+    #     else:
+    #         return arr[pi]
+
+    def countsort(self, arr, min, max):
+        fre = [0]* (max - min + 1)
+        for i in arr:
+            fre[i-min] += 1
+        for j in range(1, len(fre)):
+            fre[j] = fre[j] + fre[j-1]
+        print(arr)
+        print(fre)
+        ans = [0]*len(arr)
+        for k in range(len(arr)-1, -1, -1):
+            val = arr[k]
+            pos = fre[val - min] - 1
+            ans[pos] = val
+            fre[val - min] -= 1
+        return ans
+
+    def radixsort(self, arr):
+        maxi = max(arr)
+        exp = 1
+        while exp <= maxi:
+            self.countsort_for_radix(arr, int(exp))
+            exp *= 10
         return arr
 
-    def selection(self,arr):
-        for i in range(len(arr)):
-            min = i
-            for j in range(i+1,len(arr)):
-                if arr[min] > arr[j]:
-                    min = j
-            arr[min], arr[i] = arr[i], arr[min]
+    def countsort_for_radix(self, arr, exp):
+        fre = [0]*10
+        for i in arr:
+            fre[int((i / exp) % 10)] += 1
+        for j in range(1, len(fre)):
+            fre[j] = fre[j] + fre[j-1]
+        print(arr)
+        print(fre)
+        ans = [0]*len(arr)
+        for k in range(len(arr)-1, -1, -1):
+            pos = fre[int((arr[k] / exp) % 10)] - 1
+            ans[pos] = arr[k]
+            fre[int((arr[k] / exp) % 10)] -= 1
+        for h in range(len(arr)):
+            arr[h] = ans[h]
+
+    def sortdates(self, arr):
+        self.countsort_for_sortdates(arr, 1000000, 100, 32)
+        self.countsort_for_sortdates(arr, 10000, 100, 13)
+        self.countsort_for_sortdates(arr, 1, 1000, 2501)
         return arr
 
-    def insertion(self,arr):
-        for i in range(1, len(arr)):
-            value = arr[i]
-            hole = i
-            while (hole > 0 and arr[hole - 1] > value):
-                arr[hole] = arr[hole - 1]
-                hole -= 1
-            arr[hole] = value
-        return arr 
+    def countsort_for_sortdates(self, arr, exp1, exp2, rangee):
+        fre = [0]*rangee
+        for i in arr:
+            fre[int((i / exp1) % exp2)] += 1
+        for j in range(1, len(fre)):
+            fre[j] = fre[j] + fre[j-1]
+        ans = [0]*len(arr)
+        for k in range(len(arr)-1, -1, -1):
+            pos = fre[int((arr[k] / exp1) % exp2)] - 1
+            ans[pos] = arr[k]
+            fre[int((arr[k] / exp1) % exp2)] -= 1
+        for h in range(len(arr)):
+            arr[h] = ans[h]
+        
 
-    def merge(self,arr):
-        if len(arr) > 1:
-            mid = len(arr)//2
-            L = arr[:mid]
-            R = arr[mid:]
-            self.merge(L)
-            self.merge(R)
+    # def merge(self,arr):
+    #     if len(arr) > 1:
+    #         mid = len(arr)//2
+    #         L = arr[:mid]
+    #         R = arr[mid:]
+    #         self.merge(L)
+    #         self.merge(R)
     
-            i = j = k = 0
-            while i < len(L) and j < len(R):
-                if L[i] < R[j]:
-                    arr[k] = L[i]
-                    i += 1
-                else:
-                    arr[k] = R[j]
-                    j += 1
-                k += 1
+    #         i = j = k = 0
+    #         while i < len(L) and j < len(R):
+    #             if L[i] < R[j]:
+    #                 arr[k] = L[i]
+    #                 i += 1
+    #             else:
+    #                 arr[k] = R[j]
+    #                 j += 1
+    #             k += 1
     
-            while i < len(L):
-                arr[k] = L[i]
-                i += 1
-                k += 1
+    #         while i < len(L):
+    #             arr[k] = L[i]
+    #             i += 1
+    #             k += 1
     
-            while j < len(R):
-                arr[k] = R[j]
-                j += 1
-                k += 1
-        return arr
+    #         while j < len(R):
+    #             arr[k] = R[j]
+    #             j += 1
+    #             k += 1
+    #     return arr
 
-    def partition(self,arr, start, end):
-        i = (start-1)
-        pivot = arr[end]
-        for j in range(start, end):
-            if arr[j] <= pivot:
-                i = i+1
-                arr[i], arr[j] = arr[j], arr[i]
-        arr[i+1], arr[end] = arr[end], arr[i+1]
-        return (i+1)
+    # def partition(self,arr, start, end):
+    #     i = (start-1)
+    #     pivot = arr[end]
+    #     for j in range(start, end):
+    #         if arr[j] <= pivot:
+    #             i = i+1
+    #             arr[i], arr[j] = arr[j], arr[i]
+    #     arr[i+1], arr[end] = arr[end], arr[i+1]
+    #     return (i+1)
 
-    def quickSort(self,arr, start, end):
-        if len(arr) == 1:
-            return arr
-        if start < end:
-            pi = self.partition(arr, start, end)
-            self.quickSort(arr, start, pi-1)
-            self.quickSort(arr, pi+1, end)
+    # def quickSort(self,arr, start, end):
+    #     if len(arr) == 1:
+    #         return arr
+    #     if start < end:
+    #         pi = self.partition(arr, start, end)
+    #         self.quickSort(arr, start, pi-1)
+    #         self.quickSort(arr, pi+1, end)
 
 ll = Solution()
-print(ll.quickSort([7,2,1,6,8,5,3,4],0,7))
+# print(ll.quicksort([1,39,5,56,2,14,7,18,9,10], 0, 9))
+# print(ll.quickselect([7, 10, 4, 3, 20, 15], 3, 0, 5))
+# print(ll.radixsort([956, 61, 31223, 51, 32, 4, 3212, 90, 6112, 34, 56, 21154, 28, 19, 49]))
+print(ll.sortdates([12041996, 20101996, 5061997, 12041989, 11081987]))
