@@ -1,6 +1,3 @@
-from ast import operator
-
-
 class Solution:
     def DuplicateBracket(self, exp):
         stack = []
@@ -172,8 +169,80 @@ class Solution:
                 pre.append(i)
         return ans, inf, pre
 
+    def prefix_evaluation_conversion(self, exp):
+        ans = []
+        inf = []
+        post = []
+        for i in exp[::-1]:
+            if i in ["+", "-", "*", "/"]:
+                o = i
+                v1 = ans.pop()
+                v2 = ans.pop()
+                ans.append(self.operation(int(v1), int(v2), o))
 
-            
+                v1 = inf.pop()
+                v2 = inf.pop()
+                inf.append("("+v1+o+v2+")")
+
+                v1 = post.pop()
+                v2 = post.pop()
+                post.append(v1+v2+o)
+            else:
+                ans.append(i)
+                inf.append(i)
+                post.append(i)
+        return ans, inf, post
+
+    def celebrity(self, arr):
+        n = len(arr)
+        stack = []
+        for i in range(len(arr)):
+            stack.append(i)
+        while len(stack) != 2:
+            e1 = stack.pop()
+            e2 = stack.pop()
+            if arr[e1][e2] == 1:
+                stack.append(e2)
+            else:
+                stack.append(e1)
+
+        pot = stack.pop()
+        for i in range(len(arr)):
+            if i != pot:
+                if arr[i][pot] == 0 or arr[pot][i] == 1:
+                    return None
+        return pot
+
+    def merge_overlapping_interval(self, arr):
+        arr.sort()
+        stack = []
+        stack.append(arr[0])
+        for i in range(1, len(arr)):
+            narr = arr[i]
+            if stack[-1][1] >= narr[0]:
+                stack[-1][1] = narr[1]
+            else:
+                stack.append(narr)
+        return stack
+
+    def smallest_number_following_pattern(self, pattern):
+        stack = []
+        n = 1
+        for i in pattern:
+            if i == "d":
+                stack.append(n)
+                n += 1
+            else:
+                stack.append(n)
+                n += 1
+                while len(stack) != 0:
+                    print(stack.pop())
+        stack.append(n)
+        if stack:
+            while len(stack) != 0:
+                print(stack.pop())
+                
+                            
 if __name__ == "__main__":
     obj = Solution()
     # print(obj.DuplicateBracket("((a+b))+(c+d)"))
@@ -185,3 +254,13 @@ if __name__ == "__main__":
     # print(obj.infix_evaluation("2+5-3*6/2"))
     # print(obj.infix_conversion("a*(b-c+d)/e"))
     # print(obj.postfix_evaluation_conversion("264*8/+3-"))
+    # print(obj.prefix_evaluation_conversion("-+2/*6483"))
+    # a = [ [0, 1, 1, 1],
+    #       [1, 0, 1, 0],
+    #       [0, 0, 0, 0],
+    #       [1, 1, 1, 0]]
+    # print(obj.celebrity(a))
+    # b = [[22, 28], [1, 8], [25, 27], [14, 19], [27, 30], [5, 12]]
+    # print(obj.merge_overlapping_interval(b))
+    obj.smallest_number_following_pattern("ddidddid")
+
