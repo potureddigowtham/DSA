@@ -1,3 +1,6 @@
+from json.tool import main
+
+
 class Solution:
     def DuplicateBracket(self, exp):
         stack = []
@@ -241,8 +244,8 @@ class Solution:
         if stack:
             while len(stack) != 0:
                 print(stack.pop())
-                
-                            
+
+
 if __name__ == "__main__":
     obj = Solution()
     # print(obj.DuplicateBracket("((a+b))+(c+d)"))
@@ -262,5 +265,54 @@ if __name__ == "__main__":
     # print(obj.celebrity(a))
     # b = [[22, 28], [1, 8], [25, 27], [14, 19], [27, 30], [5, 12]]
     # print(obj.merge_overlapping_interval(b))
-    obj.smallest_number_following_pattern("ddidddid")
+    # obj.smallest_number_following_pattern("ddidddid")
 
+class Stack:
+    def __init__(self):
+        self.stack = []
+
+    def push(self, data):
+        self.stack.append(data)
+        return self.stack
+
+    def pop(self):
+        return self.stack.pop()
+
+    def peek(self):
+        return self.stack[0]
+
+    def size(self):
+        return len(self.stack)
+
+if __name__ == "__main__":
+    a = Stack()
+    # a.push(10)
+    # a.push(20)
+    # a.pop()
+    # a.size()
+    # a.peek()
+
+class Queue:
+    def __init__(self):
+        self.queue = []
+
+    def enqueue(self, data):
+        self.queue.append(data)
+        return self.queue
+
+    def dequeue(self):
+        return self.queue.pop(0)
+
+    def peek(self):
+        return self.queue[-1]
+
+    def size(self):
+        return len(self.queue)
+
+if __name__ == "__main__":
+    a = Queue()
+    a.enqueue(10)
+    a.enqueue(20)
+    a.dequeue()
+    a.size()
+    a.peek()
