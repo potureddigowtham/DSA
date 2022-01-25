@@ -6,7 +6,6 @@ class Node:
 class LinkedList:
     def __init__(self):
         self.head = None
-        self.tail = None
 
     def add_list(self, data):
         node = Node(data[0])
@@ -309,6 +308,126 @@ class LinkedList:
         node.next = None
         return node1
 
+# Reverse Linked List II
+    def reverse_ll_2(head, m, n):
+        dummy = LinkedList()
+        dummy.next = head
+        
+        cur, prev = head, dummy
+        for _ in range(m - 1):
+            cur = cur.next
+            prev = prev.next
+        
+        for _ in range(n - m):
+            temp = cur.next
+            cur.next = temp.next
+            temp.next = prev.next
+            prev.next = temp
+
+        return dummy.next
+
+# Is Linked List A Palindrome?
+    def is_palindrome(head):
+        com_f = com_l = slow = fast = head
+        while fast and fast.next and fast.next.next:
+            fast = fast.next.next
+            slow = slow.next
+        
+        com_l = slow
+        prev = slow
+        curr = slow.next
+        while curr.next:
+            temp = curr.next
+            curr.next = temp.next
+            temp.next = prev.next
+            prev.next = temp
+            
+        com_l = com_l.next
+        while com_l:
+            if com_f.data == com_l.data:
+                pass
+            else:
+                return False
+            com_f = com_f.next
+            com_l = com_l.next
+        return True
+
+# Fold A Linked List or Reorder List
+    def fold_ll(head):
+        # length = head
+        # count = 0
+        # while length:
+        #     count += 1
+        #     length = length.next
+
+        # if count < 3:
+        #     return head
+        
+        # low = head
+        # while low:
+        #     high = head
+        #     for _ in range(count-2):
+        #         high = high.next
+        #     if high == low or low == high.next:
+        #         return
+        #     temp = low.next
+        #     low.next = high.next
+        #     high.next.next = temp
+        #     high.next = None
+        #     low = low.next.next
+        
+        if not head:
+            return
+            
+        # find the mid point
+        slow = fast = head 
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+
+        # reverse the second half in-place
+        pre, node = None, slow
+        while node:
+            pre, node.next, node = node, pre, node.next
+        
+        # Merge in-place; Note : the last node of "first" and "second" are the same
+        first, second = head, pre
+        while second.next:
+            first.next, first = second, first.next
+            second.next, second = first, second.next
+        return 
+            
+# Add Two LinkedList
+    def add_2_ll(l1, l2):
+        a = l1.data + l2.data
+        d, carry = a % 10, a // 10
+        ans = Node(d)
+        if any(( l1.next, l2.next, carry)):
+            l1 = l1.next if l1.next else Node(0)
+            l2 = l2.next if l2.next else Node(0)
+            l1.data += carry
+            ans.next = LinkedList.add_2_ll(l1, l2)
+        return ans
+
+# Intersection of Two Linked Lists
+    def getIntersectionNode(self, headA, headB):
+        a = self.length(headA)
+        b = self.length(headB)
+        if a == b == 1:
+            return
+        if a >= b:
+            diff = a-b
+            for _ in range(diff):
+                headA = headA.next
+        else:
+            diff = b-a
+            for _ in range(diff):
+                headB = headB.next
+                
+        while headA != headB:
+            headA = headA.next
+            headB = headB.next 
+        return headA
 
 # obj = LinkedList()
 # obj1 = LinkedList()
@@ -342,16 +461,18 @@ class LinkedList:
 # obj5.add_list([2,2,4,2,23,3,33,4,2,4])
 # ll = LinkedList.remove_duplicates(obj5)
 # ll.print_ll()
-evenodd = LinkedList()
-evenodd.add_list([1,2,3,4])
+# evenodd = LinkedList()
+# evenodd.add_list([1,2,3,4])
 # LinkedList.print_reverse_ll(evenodd.head)
-ll = LinkedList.reverse_ll_recursive(evenodd.head)
+# ll = LinkedList.reverse_ll_recursive(evenodd.head)
+# ll = LinkedList.reverse_ll_2(evenodd.head, 2, 4)
+# print(LinkedList.is_palindrome(evenodd.head))
+# LinkedList.fold_ll(evenodd.head)
 # evenodd.reverse_ll()
 # evenodd.print_ll()
 # print(evenodd.evenodd_ll(evenodd.head))
-
-
-
-
-
-
+# n1 = LinkedList()
+# n2 = LinkedList()
+# n1.add_list([9,9,9,9,9])
+# n2.add_list([9,9])
+# LinkedList.add_2_ll(n1.head, n2.head)
