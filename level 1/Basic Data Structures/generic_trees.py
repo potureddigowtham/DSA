@@ -1,3 +1,4 @@
+from lib2to3.pgen2.pgen import generate_grammar
 from sys import displayhook
 
 
@@ -197,13 +198,98 @@ class GenericTreeNode:
                 path1.append(root.data)
                 return path1
         return []
-        
 
+# find lowest common ancestor
+    def lowest_common_ancestor(self, root, a, b):
+        path1 = self.root_to_node_path(root, a)
+        path2 = self.root_to_node_path(root, b)
+        for i in path1:
+            for j in path2:
+                if i == j:
+                    return i
+        return None
+
+# Distance btw 2 nodes
+    def diff_btw_2_nodes(self, root, a, b):
+        path1 = self.root_to_node_path(root, a)
+        path2 = self.root_to_node_path(root, b)
+        i = len(path1) - 1
+        j = len(path2) - 1
+        while (i >= 0 and j >= 0 and path1[i] == path2[j]):
+            i -= 1
+            j -= 1
+        return i+j+2
+
+# Are generic tress similar in shape
+    def are_trees_similar_in_shape(root1, root2):
+        print(root1.data, root2.data)
+        if len(root1.children) != len(root2.children):
+            return False
+        
+        for i in range(len(root1.children)):
+            temp1 = root1.children[i]
+            temp2 = root2.children[i]
+            if not GenericTreeNode.are_trees_similar_in_shape(temp1, temp2):
+                return False
+        
+        return True
+
+# Are generic trees mirror in shape
+    def are_trees_mirror_in_shape(a, b):
+        if len(a.children) != len(b.children):
+            return False
+
+        for i, j in zip(a.children, b.children[::-1]):
+            if not GenericTreeNode.are_trees_mirror_in_shape(i, j):
+                return False
+        return True
+
+    def is_generic_tree_symmetric(a):
+        return GenericTreeNode.are_trees_mirror_in_shape(a,a)
+
+    predecessor = 0
+    successor = 0
+    state = 0
+    def predecessor_and_successor(root, k):
+        if GenericTreeNode.state == 0:
+            if root.data == k:
+                GenericTreeNode.state += 1
+                return True
+            else:
+                GenericTreeNode.predecessor = root.data
+        elif GenericTreeNode.state == 1:
+            GenericTreeNode.successor = root.data
+            GenericTreeNode.state += 1
+        for i in root.children:
+            GenericTreeNode.predecessor_and_successor(i, k)
+            
+
+    ciel = 0
+    floor = 0
+    def ceil_and_floor_in_generic_tree(root, k):
+        if root.data > k:
+            GenericTreeNode.ciel = root.data if GenericTreeNode.ciel == 0 else min(GenericTreeNode.ciel, root.data)
+        if root.data < k:
+            GenericTreeNode.floor = root.data if GenericTreeNode.floor == 0 else max(GenericTreeNode.floor, root.data)
+        for i in root.children:
+            GenericTreeNode.ceil_and_floor_in_generic_tree(i, k)
+
+    def kth_largest_element_in_tree(root, k):
+        for i in range(k):
+            if i == 0:
+                GenericTreeNode.ceil_and_floor_in_generic_tree(root, 1000000)
+            else:
+                data = GenericTreeNode.floor
+                GenericTreeNode.floor = 0
+                GenericTreeNode.ceil_and_floor_in_generic_tree(root, data)
+            print(GenericTreeNode.floor)
+
+        
 if __name__ == "__main__":
-    # arr = [10,20,50,-1,60,-1,-1,30,70,-1,80,110,-1,
-    #     120,-1,-1,90,-1,-1,40,100,-1,-1,-1]
-    arr = [10,20,50,-1,60,-1,-1,30,70,-1,80,110,-1,\
+    arr = [10,20,50,-1,60,-1,-1,30,70,-1,80,110,-1,
         120,-1,-1,90,-1,-1,40,100,-1,-1,-1]
+    # arr = [10,20,50,-1,60,-1,-1,30,70,-1,80,110,-1,\
+    #     120,-1,-1,90,-1,-1,40,100,-1,-1,-1]
     # arr = [1,2,-1,3,-1,-1]
     obj = GenericTreeNode()
     tree = obj.tree_list(arr)
@@ -224,4 +310,34 @@ if __name__ == "__main__":
     # tree1 = obj.linearize_tree(tree, tree1)
     # obj.display_tree(tree1)
     # print(obj.find_in_tree(tree, 50))
-    print(obj.root_to_node_path(tree, 120))
+    # print(obj.root_to_node_path(tree, 20))
+    # print(obj.lowest_common_ancestor(tree, 90, 80))
+    # print(obj.diff_btw_2_nodes(tree, 50, 120))
+    # arr1 = [10,20,50,-1,-1,30,70,-1,80,110,-1,\
+    #     120,-1,-1,90,-1,-1,40,100,-1,-1,-1]
+    # obj1 = GenericTreeNode()
+    # tree1 = obj1.tree_list(arr1)
+    # print(GenericTreeNode.are_trees_similar_in_shape(tree, tree1))
+    # a_arr = [1, 2, -1, 3, 4, -1, 5, -1, -1]
+    # b_arr = [1, 2, 3, -1, 4, -1, -1, 5, -1]
+    # b_arr = [1, 2, -1, 3, 4, -1, 5, -1, -1]
+    # a = obj.tree_list(a_arr)
+    # b = obj1.tree_list(b_arr)
+    # print(GenericTreeNode.are_trees_mirror_in_shape(a, b))
+    # a_arr = [1, 2, 4, -1, 5, -1, -1, 3, 6, -1, 7, -1, -1]
+    # a_arr = [1, 2, 4, -1, 5, -1, -1, 3, 6, -1, -1]
+    # a = obj.tree_list(a_arr)
+    # print(GenericTreeNode.is_generic_tree_symmetric(a))
+    # GenericTreeNode.predecessor_and_successor(tree, 110)
+    # print(GenericTreeNode.predecessor)
+    # print(GenericTreeNode.successor)
+    # GenericTreeNode.ceil_and_floor_in_generic_tree(tree, 120)
+    # print(GenericTreeNode.ciel)
+    # print(GenericTreeNode.floor)
+    # GenericTreeNode.floor = 1000000000000
+    GenericTreeNode.kth_largest_element_in_tree(tree, 3)
+
+
+
+
+

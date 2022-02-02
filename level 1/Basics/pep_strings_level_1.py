@@ -57,10 +57,10 @@ class Solution:
 
     def main(self):
         self.substrings("abccbc")
-        # print(self.palindrome("abaaba"))
-        # self.string_compression('aaabbccaaaaaaggggdee')
-        # self.toggle_char('GowTHam')
-        # self.print_all_permutations("abc")
+        print(self.palindrome("abaaba"))
+        self.string_compression('aaabbccaaaaaaggggdee')
+        self.toggle_char('GowTHam')
+        self.print_all_permutations("abc")
         
 
 if __name__ == "__main__":
