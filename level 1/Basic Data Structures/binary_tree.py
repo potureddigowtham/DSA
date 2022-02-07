@@ -139,7 +139,15 @@ class binarytree:
         return root
 
 
-
+    def diameter(self, node):
+        if(node == None):
+            return 0
+        ht = self.height_btree(node.left)+self.height_btree(node.right)+2
+        ld = self.diameter(node.left)
+        rd = self.diameter(node.right)
+        
+        dia = max(ht,max(ld,rd))
+        return dia
 
 obj = binarytree()
 tree = obj.btree_list([50,25,12,None,None,37,30,None,None,None,75,62,None,70,None,None,87,None])
@@ -158,3 +166,4 @@ tree = obj.btree_list([50,25,12,None,None,37,30,None,None,None,75,62,None,70,Non
 # obj.display_btree(test)
 # temp = obj.remove_leaf_nodes(tree)
 # obj.display_btree(temp)
+print(obj.diameter(tree))
